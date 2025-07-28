@@ -1,0 +1,43 @@
+esphome:
+  name: tv-fan-project
+  friendly_name: TV Fan Project
+
+esp32:
+  board: esp32dev
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "lnlg+aTC1uDy/QYeGJBBzu5zuivdzFpj2NgK/iLb0Ws="
+
+ota:
+  - platform: esphome
+    password: "fc0a7f47f7bee71c7148c6dffc7c4c3e"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Tv-Fan-Project Fallback Hotspot"
+    password: "yrvyJ6sgd7Pp"
+
+captive_portal:
+
+web_server:
+
+sensor:
+  - platform: dht
+    pin: GPIO21
+    temperature:
+      name: "Temperature"
+    humidity:
+      name: "Humidity"
+    update_interval: 60s
+    
