@@ -44,7 +44,7 @@ sensor:
 
 switch:
   - platform: gpio
-    pin: GPIOXX               # The GPIO pin to control the fan relay
+    pin: GPIO32               # The GPIO pin to control the fan relay
     id: fan_switch
     inverted: false
 
