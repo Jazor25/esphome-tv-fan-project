@@ -38,6 +38,7 @@ sensor:
     #model: DHT22
     temperature:
       name: "Temperature"
+      id: room_temp
     humidity:
       name: "Humidity left"
     update_interval: 20s
@@ -56,6 +57,11 @@ number:
     max_value: 40
     step: 0.5
     initial_value: 25.0
+    set_action:
+      then:
+        - logger.log:
+            format: "Fan ON Temp set to %.1f"
+            args: [x]       # x ist der gesetzte Wert in set_action
 
   - platform: template
     name: "Fan OFF Temperature"
@@ -64,6 +70,11 @@ number:
     max_value: 38
     step: 0.5
     initial_value: 23.0
+    set_action:
+      then:
+        - logger.log:
+            format: "Fan OFF Temp set to %.1f"
+            args: [x]
 
 interval:
   - interval: 10s
@@ -73,12 +84,21 @@ interval:
             lambda: |-
               return id(room_temp).state > id(fan_on_temp).state;
           then:
+            - logger.log:
+                format: "Lüfter wird eingeschaltet: Raumtemperatur (%.1f) > Einschalt-Temperatur (%.1f)"
+                args: [id(room_temp).state, id(fan_on_temp).state]
+                level: INFO
             - switch.turn_on: fan_switch
       - if:
           condition:
             lambda: |-
               return id(room_temp).state < id(fan_off_temp).state;
           then:
+            - logger.log:
+                format: "Lüfter wird ausgeschaltet: Raumtemperatur (%.1f) < Ausschalttemperatur (%.1f)"
+                args: [id(room_temp).state, id(fan_off_temp).state]
+                level: INFO
             - switch.turn_off: fan_switch
+
 
     
