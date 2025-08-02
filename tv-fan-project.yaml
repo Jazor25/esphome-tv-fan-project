@@ -116,7 +116,7 @@ switch:
 
 number:
   - platform: template
-    name: "Fan ON Temperature"
+    name: "Fan ON Temperature 1"
     id: fan_on_temp_1
     min_value: 10
     max_value: 40
@@ -155,7 +155,7 @@ number:
             args: [x]       # x ist der gesetzte Wert in set_action
 
   - platform: template
-    name: "Fan OFF Temperature"
+    name: "Fan OFF Temperature 2"
     id: fan_off_temp_2
     min_value: 5
     max_value: 38
