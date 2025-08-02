@@ -1,0 +1,117 @@
+# Home Assistant Dashboard Configuration
+# Add this to your Lovelace dashboard
+
+type: vertical-stack
+cards:
+  # System Status Card
+  - type: entities
+    title: TV Fan Control System
+    show_header_toggle: false
+    entities:
+      - entity: text_sensor.tv_fan_project_fan_control_status
+        name: System Status
+        icon: mdi:fan
+      - entity: sensor.tv_fan_project_uptime
+        name: Uptime
+        icon: mdi:clock-outline
+      - entity: sensor.tv_fan_project_wifi_signal
+        name: WiFi Signal
+        icon: mdi:wifi
+
+  # Temperature Monitoring
+  - type: horizontal-stack
+    cards:
+      - type: gauge
+        entity: sensor.tv_fan_project_temperature_1
+        name: Zone 1 Temperature
+        min: 15
+        max: 40
+        severity:
+          green: 15
+          yellow: 28
+          red: 32
+      - type: gauge
+        entity: sensor.tv_fan_project_temperature_2
+        name: Zone 2 Temperature
+        min: 15
+        max: 40
+        severity:
+          green: 15
+          yellow: 28
+          red: 32
+
+  # Humidity Monitoring
+  - type: horizontal-stack
+    cards:
+      - type: gauge
+        entity: sensor.tv_fan_project_humidity_1
+        name: Zone 1 Humidity
+        min: 0
+        max: 100
+        severity:
+          green: 30
+          yellow: 60
+          red: 80
+      - type: gauge
+        entity: sensor.tv_fan_project_humidity_2
+        name: Zone 2 Humidity
+        min: 0
+        max: 100
+        severity:
+          green: 30
+          yellow: 60
+          red: 80
+
+  # Fan Controls
+  - type: entities
+    title: Fan Control
+    show_header_toggle: false
+    entities:
+      - entity: switch.tv_fan_project_fan_1_switch
+        name: Fan 1 Manual Override
+        icon: mdi:fan
+      - entity: switch.tv_fan_project_fan_2_switch
+        name: Fan 2 Manual Override
+        icon: mdi:fan
+
+  # Temperature Thresholds
+  - type: entities
+    title: Temperature Settings
+    show_header_toggle: false
+    entities:
+      - entity: number.tv_fan_project_fan_on_temperature
+        name: Fan 1 ON Temperature
+        icon: mdi:thermometer-plus
+      - entity: number.tv_fan_project_fan_off_temperature_1
+        name: Fan 1 OFF Temperature
+        icon: mdi:thermometer-minus
+      - entity: number.tv_fan_project_fan_on_temperature_2
+        name: Fan 2 ON Temperature
+        icon: mdi:thermometer-plus
+      - entity: number.tv_fan_project_fan_off_temperature
+        name: Fan 2 OFF Temperature
+        icon: mdi:thermometer-minus
+
+  # Quick Actions
+  - type: horizontal-stack
+    cards:
+      - type: button
+        tap_action:
+          action: call-service
+          service: switch.turn_off
+          target:
+            entity_id: 
+              - switch.tv_fan_project_fan_1_switch
+              - switch.tv_fan_project_fan_2_switch
+        name: Turn Off All Fans
+        icon: mdi:fan-off
+      - type: button
+        tap_action:
+          action: call-service
+          service: switch.turn_on
+          target:
+            entity_id: 
+              - switch.tv_fan_project_fan_1_switch
+              - switch.tv_fan_project_fan_2_switch
+        name: Turn On All Fans
+        icon: mdi:fan

@@ -1,6 +1,10 @@
 esphome:
   name: tv-fan-project
   friendly_name: TV Fan Project
+  comment: "Dual fan temperature control system with independent DHT22 sensors"
+  project:
+    name: "custom.tv_fan_control"
+    version: "1.0"
 
 esp32:
   board: esp32dev
@@ -70,10 +74,15 @@ text_sensor:
     update_interval: 30s
     lambda: |-
       std::string status = "";
-      status += "Fan1: " + (id(fan_switch_1).state ? "ON" : "OFF");
-      status += " (T:" + to_string(id(room_temp_1).state) + "°C)";
-      status += " | Fan2: " + (id(fan_switch_2).state ? "ON" : "OFF");
-      status += " (T:" + to_string(id(room_temp_2).state) + "°C)";
+      status += "Fan1: ";
+      status += (id(fan_switch_1).state ? "ON" : "OFF");
+      status += " (T:";
+      status += to_string(id(room_temp_1).state);
+      status += "°C) | Fan2: ";
+      status += (id(fan_switch_2).state ? "ON" : "OFF");
+      status += " (T:";
+      status += to_string(id(room_temp_2).state);
+      status += "°C)";
       return status;
 
 switch:
