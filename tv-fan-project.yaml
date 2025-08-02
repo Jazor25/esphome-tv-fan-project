@@ -168,7 +168,7 @@ number:
             args: [x]
 
 interval:
-  - interval: 10s
+  - interval: 20s
     then:
       # Fan 1 Control Logic with State Check
       - if:
