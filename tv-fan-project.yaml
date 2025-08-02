@@ -37,26 +37,67 @@ sensor:
     pin: GPIO21
     #model: DHT22
     temperature:
-      name: "Temperature"
-      id: room_temp
+      name: "Temperature_1"
+      id: room_temp_1
     humidity:
-      name: "Humidity left"
+      name: "Humidity_1"
+    update_interval: 20s
+
+  - platform: dht
+    pin: GPIO22
+    model: DHT22
+    temperature:
+      name: "Temperature_2"
+      id: room_temp_2
+    humidity:
+      name: "Humidity_2"
     update_interval: 20s
 
 switch:
   - platform: gpio
     pin: GPIO32               # The GPIO pin to control the fan relay
-    id: fan_switch
+    id: fan_switch_1
+    inverted: false
+
+  - platform: gpio
+    pin: GPIO25               # The GPIO pin to control the fan relay
+    id: fan_switch_2
     inverted: false
 
 number:
   - platform: template
     name: "Fan ON Temperature"
-    id: fan_on_temp
+    id: fan_on_temp_1
     min_value: 10
     max_value: 40
     step: 0.5
-    initial_value: 25.0 # Default: 32.0
+    initial_value: 25.0
+    set_action:
+      then:
+        - logger.log:
+            format: "Fan ON Temp set to %.1f"
+            args: [x]       # x ist der gesetzte Wert in set_action
+
+  - platform: template
+    name: "Fan OFF Temperature 1"
+    id: fan_off_temp_1
+    min_value: 5
+    max_value: 38
+    step: 0.5
+    initial_value: 24.0
+    set_action:
+      then:
+        - logger.log:
+            format: "Fan OFF Temp set to %.1f"
+            args: [x]
+
+  - platform: template
+    name: "Fan ON Temperature 2"
+    id: fan_on_temp_2
+    min_value: 10
+    max_value: 40
+    step: 0.5
+    initial_value: 25.0
     set_action:
       then:
         - logger.log:
@@ -65,11 +106,11 @@ number:
 
   - platform: template
     name: "Fan OFF Temperature"
-    id: fan_off_temp
+    id: fan_off_temp_2
     min_value: 5
     max_value: 38
     step: 0.5
-    initial_value: 23.0 # Default: 30.0
+    initial_value: 24.0
     set_action:
       then:
         - logger.log:
@@ -82,23 +123,41 @@ interval:
       - if:
           condition:
             lambda: |-
-              return id(room_temp).state > id(fan_on_temp).state;
+              return id(room_temp_1).state > id(fan_on_temp_1).state;
           then:
             - logger.log:
                 format: "Lüfter wird eingeschaltet: Raumtemperatur (%.1f) > Einschalt-Temperatur (%.1f)"
-                args: [id(room_temp).state, id(fan_on_temp).state]
+                args: [id(room_temp_1).state, id(fan_on_temp_1).state]
                 level: INFO
-            - switch.turn_on: fan_switch
+            - switch.turn_on: fan_switch_1
       - if:
           condition:
             lambda: |-
-              return id(room_temp).state < id(fan_off_temp).state;
+              return id(room_temp_1).state < id(fan_off_temp_1).state;
           then:
             - logger.log:
                 format: "Lüfter wird ausgeschaltet: Raumtemperatur (%.1f) < Ausschalttemperatur (%.1f)"
-                args: [id(room_temp).state, id(fan_off_temp).state]
+                args: [id(room_temp_1).state, id(fan_off_temp_1).state]
                 level: INFO
-            - switch.turn_off: fan_switch
-
-
-    
+            - switch.turn_off: fan_switch_1
+      
+      - if:
+          condition:
+            lambda: |-
+              return id(room_temp_2).state > id(fan_on_temp_2).state;
+          then:
+            - logger.log:
+                format: "Lüfter wird eingeschaltet: Raumtemperatur (%.1f) > Einschalt-Temperatur (%.1f)"
+                args: [id(room_temp_2).state, id(fan_on_temp_2).state]
+                level: INFO
+            - switch.turn_on: fan_switch_2
+      - if:
+          condition:
+            lambda: |-
+              return id(room_temp_2).state < id(fan_off_temp_2).state;
+          then:
+            - logger.log:
+                format: "Lüfter wird ausgeschaltet: Raumtemperatur (%.1f) < Ausschalttemperatur (%.1f)"
+                args: [id(room_temp_2).state, id(fan_off_temp_2).state]
+                level: INFO
+            - switch.turn_off: fan_switch_2
