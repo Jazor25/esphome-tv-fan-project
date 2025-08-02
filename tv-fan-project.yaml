@@ -35,7 +35,7 @@ web_server:
 sensor:
   - platform: dht
     pin: GPIO21
-    #model: DHT22
+    model: DHT22
     temperature:
       name: "Temperature_1"
       id: room_temp_1
@@ -71,11 +71,11 @@ number:
     min_value: 10
     max_value: 40
     step: 0.5
-    initial_value: 25.0
+    initial_value: 25.0  # soll: 32
     set_action:
       then:
         - logger.log:
-            format: "Fan ON Temp set to %.1f"
+            format: "Fan 1 ON Temp set to %.1f"
             args: [x]       # x ist der gesetzte Wert in set_action
 
   - platform: template
@@ -84,11 +84,11 @@ number:
     min_value: 5
     max_value: 38
     step: 0.5
-    initial_value: 24.0
+    initial_value: 24.0  # soll: 28
     set_action:
       then:
         - logger.log:
-            format: "Fan OFF Temp set to %.1f"
+            format: "Fan 1 OFF Temp set to %.1f"
             args: [x]
 
   - platform: template
@@ -97,11 +97,11 @@ number:
     min_value: 10
     max_value: 40
     step: 0.5
-    initial_value: 25.0
+    initial_value: 25.0 # soll: 32
     set_action:
       then:
         - logger.log:
-            format: "Fan ON Temp set to %.1f"
+            format: "Fan 2 ON Temp set to %.1f"
             args: [x]       # x ist der gesetzte Wert in set_action
 
   - platform: template
@@ -110,11 +110,11 @@ number:
     min_value: 5
     max_value: 38
     step: 0.5
-    initial_value: 24.0
+    initial_value: 24.0 # soll: 28
     set_action:
       then:
         - logger.log:
-            format: "Fan OFF Temp set to %.1f"
+            format: "Fan 2 OFF Temp set to %.1f"
             args: [x]
 
 interval:
@@ -126,7 +126,7 @@ interval:
               return id(room_temp_1).state > id(fan_on_temp_1).state;
           then:
             - logger.log:
-                format: "Lüfter wird eingeschaltet: Raumtemperatur (%.1f) > Einschalt-Temperatur (%.1f)"
+                format: "Lüfter 1 wird eingeschaltet: Raumtemperatur (%.1f) > Einschalt-Temperatur (%.1f)"
                 args: [id(room_temp_1).state, id(fan_on_temp_1).state]
                 level: INFO
             - switch.turn_on: fan_switch_1
@@ -136,7 +136,7 @@ interval:
               return id(room_temp_1).state < id(fan_off_temp_1).state;
           then:
             - logger.log:
-                format: "Lüfter wird ausgeschaltet: Raumtemperatur (%.1f) < Ausschalttemperatur (%.1f)"
+                format: "Lüfter 1 wird ausgeschaltet: Raumtemperatur (%.1f) < Ausschalttemperatur (%.1f)"
                 args: [id(room_temp_1).state, id(fan_off_temp_1).state]
                 level: INFO
             - switch.turn_off: fan_switch_1
@@ -147,7 +147,7 @@ interval:
               return id(room_temp_2).state > id(fan_on_temp_2).state;
           then:
             - logger.log:
-                format: "Lüfter wird eingeschaltet: Raumtemperatur (%.1f) > Einschalt-Temperatur (%.1f)"
+                format: "Lüfter 2 wird eingeschaltet: Raumtemperatur (%.1f) > Einschalt-Temperatur (%.1f)"
                 args: [id(room_temp_2).state, id(fan_on_temp_2).state]
                 level: INFO
             - switch.turn_on: fan_switch_2
@@ -157,7 +157,7 @@ interval:
               return id(room_temp_2).state < id(fan_off_temp_2).state;
           then:
             - logger.log:
-                format: "Lüfter wird ausgeschaltet: Raumtemperatur (%.1f) < Ausschalttemperatur (%.1f)"
+                format: "Lüfter 2 wird ausgeschaltet: Raumtemperatur (%.1f) < Ausschalttemperatur (%.1f)"
                 args: [id(room_temp_2).state, id(fan_off_temp_2).state]
                 level: INFO
             - switch.turn_off: fan_switch_2
