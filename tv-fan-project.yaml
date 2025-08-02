@@ -34,7 +34,7 @@ web_server:
 
 sensor:
   - platform: dht
-    pin: GPIO21
+    pin: GPIO22
     model: DHT22
     temperature:
       name: "Temperature_1"
@@ -44,7 +44,7 @@ sensor:
     update_interval: 20s
 
   - platform: dht
-    pin: GPIO22
+    pin: GPIO21
     model: DHT22
     temperature:
       name: "Temperature_2"
