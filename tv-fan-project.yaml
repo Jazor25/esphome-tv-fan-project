@@ -53,16 +53,57 @@ sensor:
       name: "Humidity_2"
     update_interval: 20s
 
+  # System monitoring sensors
+  - platform: uptime
+    name: "Uptime"
+    update_interval: 60s
+
+  - platform: wifi_signal
+    name: "WiFi Signal"
+    update_interval: 60s
+
+# Text sensors for system status
+text_sensor:
+  - platform: template
+    name: "Fan Control Status"
+    id: fan_status
+    update_interval: 30s
+    lambda: |-
+      std::string status = "";
+      status += "Fan1: " + (id(fan_switch_1).state ? "ON" : "OFF");
+      status += " (T:" + to_string(id(room_temp_1).state) + "°C)";
+      status += " | Fan2: " + (id(fan_switch_2).state ? "ON" : "OFF");
+      status += " (T:" + to_string(id(room_temp_2).state) + "°C)";
+      return status;
+
 switch:
   - platform: gpio
     pin: GPIO32               # The GPIO pin to control the fan relay
     id: fan_switch_1
+    name: "Fan 1 Switch"
     inverted: false
+    on_turn_on:
+      - logger.log:
+          format: "Fan 1 relay activated (GPIO32 HIGH)"
+          level: INFO
+    on_turn_off:
+      - logger.log:
+          format: "Fan 1 relay deactivated (GPIO32 LOW)"
+          level: INFO
 
   - platform: gpio
     pin: GPIO25               # The GPIO pin to control the fan relay
     id: fan_switch_2
+    name: "Fan 2 Switch"
     inverted: false
+    on_turn_on:
+      - logger.log:
+          format: "Fan 2 relay activated (GPIO25 HIGH)"
+          level: INFO
+    on_turn_off:
+      - logger.log:
+          format: "Fan 2 relay deactivated (GPIO25 LOW)"
+          level: INFO
 
 number:
   - platform: template
@@ -120,44 +161,82 @@ number:
 interval:
   - interval: 10s
     then:
+      # Fan 1 Control Logic with State Check
       - if:
           condition:
             lambda: |-
-              return id(room_temp_1).state > id(fan_on_temp_1).state;
+              return id(room_temp_1).state > id(fan_on_temp_1).state && !id(fan_switch_1).state;
           then:
             - logger.log:
-                format: "Lüfter 1 wird eingeschaltet: Raumtemperatur (%.1f) > Einschalt-Temperatur (%.1f)"
+                format: "Fan 1 turning ON: Temperature (%.1f°C) > Threshold (%.1f°C)"
                 args: [id(room_temp_1).state, id(fan_on_temp_1).state]
                 level: INFO
             - switch.turn_on: fan_switch_1
       - if:
           condition:
             lambda: |-
-              return id(room_temp_1).state < id(fan_off_temp_1).state;
+              return id(room_temp_1).state > id(fan_on_temp_1).state && id(fan_switch_1).state;
           then:
             - logger.log:
-                format: "Lüfter 1 wird ausgeschaltet: Raumtemperatur (%.1f) < Ausschalttemperatur (%.1f)"
-                args: [id(room_temp_1).state, id(fan_off_temp_1).state]
-                level: INFO
-            - switch.turn_off: fan_switch_1
-      
+                format: "Fan 1 already ON: Temperature (%.1f°C) > Threshold (%.1f°C)"
+                args: [id(room_temp_1).state, id(fan_on_temp_1).state]
+                level: DEBUG
       - if:
           condition:
             lambda: |-
-              return id(room_temp_2).state > id(fan_on_temp_2).state;
+              return id(room_temp_1).state < id(fan_off_temp_1).state && id(fan_switch_1).state;
           then:
             - logger.log:
-                format: "Lüfter 2 wird eingeschaltet: Raumtemperatur (%.1f) > Einschalt-Temperatur (%.1f)"
+                format: "Fan 1 turning OFF: Temperature (%.1f°C) < Threshold (%.1f°C)"
+                args: [id(room_temp_1).state, id(fan_off_temp_1).state]
+                level: INFO
+            - switch.turn_off: fan_switch_1
+      - if:
+          condition:
+            lambda: |-
+              return id(room_temp_1).state < id(fan_off_temp_1).state && !id(fan_switch_1).state;
+          then:
+            - logger.log:
+                format: "Fan 1 already OFF: Temperature (%.1f°C) < Threshold (%.1f°C)"
+                args: [id(room_temp_1).state, id(fan_off_temp_1).state]
+                level: DEBUG
+      
+      # Fan 2 Control Logic with State Check
+      - if:
+          condition:
+            lambda: |-
+              return id(room_temp_2).state > id(fan_on_temp_2).state && !id(fan_switch_2).state;
+          then:
+            - logger.log:
+                format: "Fan 2 turning ON: Temperature (%.1f°C) > Threshold (%.1f°C)"
                 args: [id(room_temp_2).state, id(fan_on_temp_2).state]
                 level: INFO
             - switch.turn_on: fan_switch_2
       - if:
           condition:
             lambda: |-
-              return id(room_temp_2).state < id(fan_off_temp_2).state;
+              return id(room_temp_2).state > id(fan_on_temp_2).state && id(fan_switch_2).state;
           then:
             - logger.log:
-                format: "Lüfter 2 wird ausgeschaltet: Raumtemperatur (%.1f) < Ausschalttemperatur (%.1f)"
+                format: "Fan 2 already ON: Temperature (%.1f°C) > Threshold (%.1f°C)"
+                args: [id(room_temp_2).state, id(fan_on_temp_2).state]
+                level: DEBUG
+      - if:
+          condition:
+            lambda: |-
+              return id(room_temp_2).state < id(fan_off_temp_2).state && id(fan_switch_2).state;
+          then:
+            - logger.log:
+                format: "Fan 2 turning OFF: Temperature (%.1f°C) < Threshold (%.1f°C)"
                 args: [id(room_temp_2).state, id(fan_off_temp_2).state]
                 level: INFO
             - switch.turn_off: fan_switch_2
+      - if:
+          condition:
+            lambda: |-
+              return id(room_temp_2).state < id(fan_off_temp_2).state && !id(fan_switch_2).state;
+          then:
+            - logger.log:
+                format: "Fan 2 already OFF: Temperature (%.1f°C) < Threshold (%.1f°C)"
+                args: [id(room_temp_2).state, id(fan_off_temp_2).state]
+                level: DEBUG

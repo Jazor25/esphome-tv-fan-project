@@ -1,0 +1,93 @@
+```
+ESP32 Fan Control System - Detailed Wiring Schematic
+=====================================================
+
+                    12V 1-2A Power Supply
+                    ┌─────────────────────┐
+                    │        +12V    GND  │
+                    └──────────┬───────┬──┘
+                               │       │
+                    ┌──────────┴───────┴────────────────────────┐
+                    │                                           │
+                    │         Power Distribution                │
+                    │                                           │
+         ┌──────────┴─────┐    ┌─────────────────┐    ┌────────┴────────┐
+         │                │    │                 │    │                 │
+         │   LM2596s      │    │   FET Board #1  │    │   FET Board #2  │
+         │ Buck Converter │    │   (GPIO32)      │    │   (GPIO25)      │
+         │                │    │                 │    │                 │
+         │ IN+  ←─ 12V    │    │ VCC ←─ 12V      │    │ VCC ←─ 12V      │
+         │ IN-  ←─ GND    │    │ GND ←─ GND      │    │ GND ←─ GND      │
+         │ OUT+ ──→ 5V    │    │ SIG ←─ ESP32    │    │ SIG ←─ ESP32    │
+         │ OUT- ──→ GND   │    │ DC+ ──→ Fan #1+ │    │ DC+ ──→ Fan #2+ │
+         └────────┬───────┘    │ DC- ──→ Fan #1- │    │ DC- ──→ Fan #2- │
+                  │            └─────────┬───────┘    └─────────┬───────┘
+                  │                      │                      │
+                  │            ┌─────────┴───────┐    ┌─────────┴───────┐
+                  │            │     Fan #1      │    │     Fan #2      │
+                  │            │   (12V RPM)     │    │   (12V RPM)     │
+                  │            │  Red(+) Black(-)│    │  Red(+) Black(-)│
+                  │            └─────────────────┘    └─────────────────┘
+                  │
+            ┌─────┴─────────────────────────────────────────────────────┐
+            │                    ESP32 V4                                │
+            │                  (CP2102)                                  │
+            │                                                            │
+            │  VIN ←─ 5V (from LM2596s)                                  │
+            │  GND ←─ Common Ground                                      │
+            │                                                            │
+            │  GPIO22 ──→ DHT22 #1 Data   GPIO21 ──→ DHT22 #2 Data     │
+            │  GPIO32 ──→ FET Board #1    GPIO25 ──→ FET Board #2       │
+            │  3.3V   ──→ DHT22 Power (both sensors)                    │
+            │                                                            │
+            └──────────────┬─────────────────────┬─────────────────────┘
+                           │                     │
+                ┌──────────┴───────┐  ┌──────────┴───────┐
+                │    DHT22 #1      │  │    DHT22 #2      │
+                │ (Temperature &   │  │ (Temperature &   │
+                │  Humidity)       │  │  Humidity)       │
+                │                  │  │                  │
+                │ 1. VCC ←─ 3.3V   │  │ 1. VCC ←─ 3.3V   │
+                │ 2. Data ─→ GPIO22│  │ 2. Data ─→ GPIO21│
+                │ 3. NC            │  │ 3. NC            │
+                │ 4. GND ←─ GND    │  │ 4. GND ←─ GND    │
+                │                  │  │                  │
+                │ Note: Add 10kΩ   │  │ Note: Add 10kΩ   │
+                │ pull-up resistor │  │ pull-up resistor │
+                │ VCC to Data      │  │ VCC to Data      │
+                └──────────────────┘  └──────────────────┘
+
+Ground Distribution:
+==================
+                            Common Ground Bus
+    ┌─────────────────────────────────────────────────────────────┐
+    │                                                             │
+    ├─ 12V Power Supply (-)                                       │
+    ├─ LM2596s (IN-, OUT-)                                        │
+    ├─ ESP32 (GND)                                                │
+    ├─ DHT22 #1 (Pin 4)                                           │
+    ├─ DHT22 #2 (Pin 4)                                           │
+    ├─ FET Board #1 (GND)                                         │
+    └─ FET Board #2 (GND)                                         │
+
+Control Logic:
+=============
+Temperature Sensor 1 (GPIO22) → Controls → Fan 1 (GPIO32)
+Temperature Sensor 2 (GPIO21) → Controls → Fan 2 (GPIO25)
+
+Default Settings:
+- Fan ON Temperature: 31.0°C
+- Fan OFF Temperature: 29.0°C (Fan 1), 28.0°C (Fan 2)
+- Check Interval: 10 seconds
+- Sensor Update: 20 seconds
+
+Signal Flow:
+===========
+DHT22 → ESP32 → Temperature Reading → Logic → GPIO Output → FET Board → Fan Control
+
+Power Flow:
+==========
+12V Supply → LM2596s → 5V → ESP32
+12V Supply → FET Boards → Fans (when triggered)
+ESP32 3.3V → DHT22 Sensors
+```
