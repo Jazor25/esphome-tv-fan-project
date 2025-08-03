@@ -5,18 +5,18 @@ esphome:
   project:
     name: "custom.tv_fan_control"
     version: "1.0"
+  on_boot:
+    priority: -100
+    then:
+      - text_sensor.template.publish:
+          id: device_status
+          state: "on"
 
 esp32:
   board: esp32dev
   framework:
     type: esp-idf
 
-on_boot:
-  priority: -100
-  then:
-    - text_sensor.template.publish:
-        id: device_status
-        state: "on"
 
 # Enable logging
 logger:
