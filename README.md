@@ -1,4 +1,4 @@
-# ESP Home Fan Project
+# ESPHome Fan Project
 Control 2 Fans independently depending on the temperature of 2 distict DHT22 sensors.
 
 ## Hardware
