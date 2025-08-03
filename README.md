@@ -26,7 +26,7 @@ Control 2 Fans independently depending on the temperature of 2 distict DHT22 sen
 - **[Cable Assignments](img/cable_assignments.png)** - Physical cable reference
 
 ### Key Connections
-- **Power**: 12V supply → LM2596s (set to 5V) → ESP32 VIN
+- **Power**: 12V supply → LM2596s (set to 3.3V) → ESP32 VIN
 - **Sensors**: DHT22 data pins to GPIO22/21, powered by ESP32 3.3V
 - **Fan Control**: GPIO32/25 → FET board signal pins
 - **Ground**: Common ground for all components
