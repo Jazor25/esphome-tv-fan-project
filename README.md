@@ -21,8 +21,8 @@ Control 2 Fans independently depending on the temperature of 2 distict DHT22 sen
 | GPIO25   | FET Board #2 | Fan 2 Control Signal |
 
 ### Wiring Diagrams
-- **[Complete Wiring Guide](wiring_diagrams.md)** - Detailed connection tables, safety notes, and troubleshooting
-- **[Visual Schematic](detailed_schematic.txt)** - ASCII art diagram showing component connections
+- **[Complete Wiring Guide](docs/wiring_diagrams.md)** - Detailed connection tables, safety notes, and troubleshooting
+- **[Visual Schematic](docs/detailed_schematic.txt)** - ASCII art diagram showing component connections
 - **[Cable Assignments](img/cable_assignments.png)** - Physical cable reference
 
 ### Key Connections
