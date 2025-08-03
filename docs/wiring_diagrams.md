@@ -24,7 +24,7 @@
 │  12V Power  │           │  GPIO32  ────── │ ──── FET Board #1 Signal
 │   Supply    │           │  GPIO25  ────── │ ──── FET Board #2 Signal
 │             │           │                 │
-│   +12V ─────┼───────────│  VIN     ────── │ ──── 12V Input (via Buck Converter)
+│   +12V ─────┼───────────│  VIN     ────── │ ──── 12V --> 3.3V Input (via Buck Converter)
 │    GND ─────┼───────────│  GND     ────── │ ──── Common Ground
 └─────────────┘           │  3.3V    ────── │ ──── DHT22 VCC (both sensors)
                            └─────────────────┘
@@ -37,7 +37,7 @@
                            │                 │
                            │  IN+  ←─ 12V    │
                            │  IN-  ←─ GND    │
-                           │  OUT+ ──→ 5V    │ ──── To ESP32 VIN
+                           │  OUT+ ──→ 3.3V  │ ──── To ESP32 VIN
                            │  OUT- ──→ GND   │ ──── Common Ground
                            └─────────────────┘
 ```
@@ -48,22 +48,20 @@
 DHT22 Sensor #1                    DHT22 Sensor #2
 ┌─────────────┐                    ┌─────────────┐
 │      ┌─┐    │                    │      ┌─┐    │
-│   1 ─┤ ├─ 4 │                    │   1 ─┤ ├─ 4 │
+│   1 ─┤ |    │                    │   1 ─┤ |    │
 │   2 ─┤ ├─ 3 │                    │   2 ─┤ ├─ 3 │
 │      └─┘    │                    │      └─┘    │
 └─────────────┘                    └─────────────┘
 Pin 1: VCC (3.3V)                  Pin 1: VCC (3.3V)
 Pin 2: Data → GPIO22               Pin 2: Data → GPIO21
-Pin 3: Not Connected               Pin 3: Not Connected
-Pin 4: GND                         Pin 4: GND
+Pin 3: GND                         Pin 3: GND
 
-Note: Add 10kΩ pull-up resistor between VCC and Data pin for each DHT22
 ```
 
 ## FET Switch Board Connections
 
 ```
-FET Board #1 (400W)                FET Board #2 (400W)
+FET Board #1                       FET Board #2
 ┌─────────────────┐                ┌─────────────────┐
 │  DC+ ←─ Fan 1 + │                │  DC+ ←─ Fan 2 + │
 │  DC- ←─ Fan 1 - │                │  DC- ←─ Fan 2 - │
@@ -99,7 +97,7 @@ FET Board #1 (400W)                FET Board #2 (400W)
                 └─── Common Ground (All Components)
 
 LM2596s Output:
-5V ────── ESP32 VIN
+3.3V ────── ESP32 VIN
 GND ───── Common Ground
 ```
 
@@ -145,10 +143,9 @@ GND ───── Common Ground
 
 1. **Power Supply Ratings**: Ensure 12V supply can handle total current draw (ESP32 + 2 fans)
 2. **Heat Dissipation**: FET boards may generate heat under load - ensure adequate ventilation
-3. **Pull-up Resistors**: DHT22 sensors require 10kΩ pull-up resistors on data lines
-4. **Voltage Regulation**: Set LM2596s output to 5V for ESP32 VIN pin
-5. **Common Ground**: All components must share common ground connection
-6. **Wire Gauge**: Use appropriate wire gauge for 12V fan current (typically 18-20 AWG)
+3. **Voltage Regulation**: Set LM2596s output to 3.3V for ESP32 VIN pin
+4. **Common Ground**: All components must share common ground connection
+5. **Wire Gauge**: Use appropriate wire gauge for 12V fan current (typically 18-20 AWG)
 
 ## Testing Procedure
 
@@ -163,7 +160,7 @@ GND ───── Common Ground
 
 | Issue | Check |
 |-------|-------|
-| DHT22 not reading | Pull-up resistor, wiring, power |
+| DHT22 not reading | wiring, power |
 | Fan not switching | FET board power, signal connection |
 | ESP32 not booting | Power supply voltage, current capacity |
 | Erratic behavior | Common ground, power supply stability |
