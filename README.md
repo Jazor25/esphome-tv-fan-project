@@ -39,7 +39,7 @@ Control 2 Fans independently depending on the temperature of 2 distict DHT22 sen
 - **Home Assistant Integration**: Full API integration with encryption
 
 ## 3D Case
-* 5x Thread Insert M3
+* 5x Ruthex Thread Insert M3
 * 5x M3 Screws
-* 7x Thread Insert M2
+* 7x Ruthex Thread Insert M2
 * 7x M2 Screws
