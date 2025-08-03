@@ -11,6 +11,13 @@ esp32:
   framework:
     type: esp-idf
 
+on_boot:
+  priority: -100
+  then:
+    - text_sensor.template.publish:
+        id: device_status
+        state: "on"
+
 # Enable logging
 logger:
 
@@ -34,7 +41,7 @@ wifi:
 
 captive_portal:
 
-web_server:
+#web_server:
 
 sensor:
   - platform: dht
@@ -69,21 +76,14 @@ sensor:
 # Text sensors for system status
 text_sensor:
   - platform: template
-    name: "Fan Control Status"
-    id: fan_status
-    update_interval: 30s
-    lambda: |-
-      std::string status = "";
-      status += "Fan1: ";
-      status += (id(fan_switch_1).state ? "ON" : "OFF");
-      status += " (T:";
-      status += to_string(id(room_temp_1).state);
-      status += "°C) | Fan2: ";
-      status += (id(fan_switch_2).state ? "ON" : "OFF");
-      status += " (T:";
-      status += to_string(id(room_temp_2).state);
-      status += "°C)";
-      return status;
+    id: device_status
+    name: "Device Status"
+    update_interval: never
+
+  - platform: wifi_info
+    ip_address:
+      name: "IP Address"
+
 
 switch:
   - platform: gpio
@@ -116,7 +116,7 @@ switch:
 
 number:
   - platform: template
-    name: "Fan ON Temperature 1"
+    name: "Fan 1 ON Temperature"
     id: fan_on_temp_1
     min_value: 10
     max_value: 40
@@ -129,7 +129,7 @@ number:
             args: [x]       # x ist der gesetzte Wert in set_action
 
   - platform: template
-    name: "Fan OFF Temperature 1"
+    name: "Fan 1 OFF Temperature"
     id: fan_off_temp_1
     min_value: 5
     max_value: 38
@@ -142,7 +142,7 @@ number:
             args: [x]
 
   - platform: template
-    name: "Fan ON Temperature 2"
+    name: "Fan 2 ON Temperature"
     id: fan_on_temp_2
     min_value: 10
     max_value: 40
@@ -155,7 +155,7 @@ number:
             args: [x]       # x ist der gesetzte Wert in set_action
 
   - platform: template
-    name: "Fan OFF Temperature 2"
+    name: "Fan 2 OFF Temperature"
     id: fan_off_temp_2
     min_value: 5
     max_value: 38
