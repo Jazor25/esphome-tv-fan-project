@@ -1,6 +1,8 @@
 # ESPHome Fan Project
 Control 2 Fans independently depending on the temperature of 2 distict DHT22 sensors.
 
+![Installed Case (Closed)](img/installed_case_closed.jpg)
+
 ## Hardware
 * ESP-32 (Used here: ESP32 V4 with CP2102, AZDelivery)
 * 2x DC 5V-36V 400W FET Trigger Switch Board
