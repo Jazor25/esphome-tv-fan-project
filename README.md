@@ -2,6 +2,9 @@
 Control 2 Fans independently depending on the temperature of 2 distict DHT22 sensors.
 
 ![Installed Case (Closed)](img/installed_case_closed.jpg)
+![Installed Case in cabinet](img/box_installed_in_cabinet.jpg)
+![Installed Fan 1](img/fan_installed_1.jpg)
+![Installed Fan 2](img/fan_installed_2.jpg)
 
 ## Hardware
 * ESP-32 (Used here: ESP32 V4 with CP2102, AZDelivery)
