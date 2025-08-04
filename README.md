@@ -1,5 +1,5 @@
 # ESPHome Fan Project
-Control 2 Fans independently depending on the temperature of 2 distict DHT22 sensors.
+Controls 2 Fans independently, based on the temperature of 2 distict DHT22 sensors. This solution can natively be integratd into Home Assistant using ESPHome but it also runs autonomously without it.
 
 ![Installed Case (Closed)](img/installed_case_closed.jpg)
 ![cabinet](img/cabinet.jpg)
