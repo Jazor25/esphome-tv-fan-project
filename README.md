@@ -51,7 +51,7 @@ Controls 2 Fans independently, based on the temperature of 2 distict DHT22 senso
 * 7x Ruthex Thread Insert M2
 * 7x M2 Screw
 
-## Some mounting hints
+## Some assembly hints
 * The Buck Transformer needs to be adapted to 3.3V precisely to not destroy the ESP32 and other attached modules. Therefore, put 12V + and - respectively on the IN Pins, connect a multimeter (set to Voltage) to the OUT Pins and turn the screw of the poti with a screwdriver until the Multimeter shows 3.3V.
 * The 3D case is designed to be as small as possible. Therefore, there is not too much flexibility in how to mount things together. In case you solder PINs on each component (where necessary), make sure that one of the two transistor boards has the PINs soldered "upside down" - Otherwise the box won't close.
 In case of doubt, take a look at the images in the img folder.
