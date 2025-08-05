@@ -1,5 +1,5 @@
 # ESPHome TV Fan Project
-Controls 2 Fans independently, based on the temperature of 2 distict DHT22 sensors. This solution can natively be integratd into Home Assistant using ESPHome but it also runs autonomously without it.
+Controls 2 Fans independently, based on the temperature of 2 distinct DHT22 sensors. This solution can natively be integratd into Home Assistant using ESPHome but it also runs autonomously without it.
 
 ![Installed Case (Closed)](img/installed_case_closed.jpg)
 ![Mounted Case (Open)](img/fully_mounted_case_open.jpg)
