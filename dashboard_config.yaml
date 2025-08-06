@@ -79,16 +79,16 @@ cards:
     title: Temperature Settings
     show_header_toggle: false
     entities:
-      - entity: number.tv_fan_project_fan_on_temperature
+      - entity: number.tv_fan_project_fan_1_on_temperature
         name: Fan 1 ON Temperature
         icon: mdi:thermometer-plus
-      - entity: number.tv_fan_project_fan_off_temperature_1
+      - entity: number.tv_fan_project_fan_1_off_temperature
         name: Fan 1 OFF Temperature
         icon: mdi:thermometer-minus
-      - entity: number.tv_fan_project_fan_on_temperature_2
+      - entity: number.tv_fan_project_fan_2_on_temperature
         name: Fan 2 ON Temperature
         icon: mdi:thermometer-plus
-      - entity: number.tv_fan_project_fan_off_temperature
+      - entity: number.tv_fan_project_fan_2_off_temperature
         name: Fan 2 OFF Temperature
         icon: mdi:thermometer-minus
 
