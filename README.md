@@ -14,6 +14,8 @@ This project is inspired by the excellent work of [patrickcollins12 on GitHub](h
 * My Playstation 5 becomes hot as hell pretty fast, so the fan needs to run on 100% anyways. Also Noctua fans are so silent, that decreasing fan speed is not really necessary from my point of view. 
 
 ## Visuals
+(More images are in the /docs folder)
+
 ![Installed Case (Closed)](img/installed_case_closed.jpg)
 ![Mounted Case (Open)](img/fully_mounted_case_open.jpg)
 ![cabinet](img/cabinet.jpg)
