@@ -7,6 +7,7 @@ Controls 2 Fans independently, based on the temperature of 2 distinct DHT22 sens
 ![Installed Case in cabinet](img/box_installed_in_cabinet.jpg)
 ![Installed Fan 1](img/fan_installed_1.jpg)
 ![Installed Fan 2](img/fan_installed_2.jpg)
+![Home Assistant Integration](img/home_assistant_integration.png)
 
 ## Hardware
 * ESP-32 (Used here: ESP32 V4 with CP2102, AZDelivery)
