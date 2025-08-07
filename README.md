@@ -3,7 +3,7 @@ This project describes how to build a thermostat-controlled fan control system f
 
 This setup controls 2 fans independently, based on the temperature of 2 distinct DHT22 sensors, but could easily be extended to control more fans and/or DHT22's. 
 
-This solution can natively be integratd into Home Assistant using ESPHome, but it also runs autonomously without it.
+This solution can natively be integrated into Home Assistant using ESPHome, but it also runs autonomously and controls fans based on the temperature in the cabinet without it.
 
 # Motivation
 I wanted to build a TV/Media setup in our living room that is as clean as possible. This means (mostly) no devices visible on or in the TV board. Hardware running in closed cabinets without cooling results in overheated hardware, so I needed to find a solution. I already built something similar based on an Arduino Uno 3 years ago, which did no longer work properly and had no integration with Home Assistant.
