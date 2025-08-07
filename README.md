@@ -11,7 +11,7 @@ I wanted to build a TV/Media setup in our living room that is as clean as possib
 This project is inspired by the excellent work of [patrickcollins12 on GitHub](https://github.com/patrickcollins12/esphome-fan-controller). I built my own project for several reasons:
 * I only had 3 PIN fans from an older similar setup, no PWM conrol
 * I wanted to have a Transistor controled switch solution, to have a reliant way to switch of both fans (not always reliantly possible using PWM signals only)
-* My Playstation 5 becomes hot as hell pretty fast, so the fan needs to run on 100% anyways. Then again Noctua fans as so silent, that decreasing fan speed is not really necessary from my point of view. 
+* My Playstation 5 becomes hot as hell pretty fast, so the fan needs to run on 100% anyways. Also Noctua fans are so silent, that decreasing fan speed is not really necessary from my point of view. 
 
 ## Visuals
 ![Installed Case (Closed)](img/installed_case_closed.jpg)
