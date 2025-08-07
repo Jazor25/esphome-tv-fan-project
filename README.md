@@ -1,6 +1,19 @@
 # ESPHome TV Fan Project
-Controls 2 Fans independently, based on the temperature of 2 distinct DHT22 sensors. This solution can natively be integratd into Home Assistant using ESPHome but it also runs autonomously without it.
+This project describes how to build a thermostat-controlled fan control system for cooling your Playstation, Tuner or other hardware in a cabinet.
 
+This setup controls 2 fans independently, based on the temperature of 2 distinct DHT22 sensors, but could easily be extended to control more fans and/or DHT22's. 
+
+This solution can natively be integratd into Home Assistant using ESPHome, but it also runs autonomously without it.
+
+# Motivation
+I wanted to build a TV/Media setup in our living room that is as clean as possible. This means (mostly) no devices visible on or in the TV board. Hardware running in closed cabinets without cooling results in overheated hardware, so I needed to find a solution.
+
+This project is inspired by the excellent work of [patrickcollins12 on GitHub](https://github.com/patrickcollins12/esphome-fan-controller). I built my own project for several reasons:
+* I only had 3 PIN fans from an older similar setup, no PWM conrol
+* I wanted to have a Transistor controled switch solution, to have a reliant way to switch of both fans (not always reliantly possible using PWM signals only)
+* My Playstation 5 becomes hot as hell pretty fast, so the fan needs to run on 100% anyways. Then again Noctua fans as so silent, that decreasing fan speed is not really necessary from my point of view. 
+
+## Visuals
 ![Installed Case (Closed)](img/installed_case_closed.jpg)
 ![Mounted Case (Open)](img/fully_mounted_case_open.jpg)
 ![cabinet](img/cabinet.jpg)
