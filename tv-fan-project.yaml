@@ -37,7 +37,7 @@ wifi:
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "Tv-Fan-Project Fallback Hotspot"
-    password: "yrvyJ6sgd7Pp"
+    password: !secret ap_wifi_password
 
 captive_portal:
 
