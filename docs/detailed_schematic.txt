@@ -18,7 +18,7 @@ ESP32 Fan Control System - Detailed Wiring Schematic
          │                │    │                 │    │                 │
          │ IN+  ←─ 12V    │    │ VCC ←─ 12V      │    │ VCC ←─ 12V      │
          │ IN-  ←─ GND    │    │ GND ←─ GND      │    │ GND ←─ GND      │
-         │ OUT+ ──→ 5V    │    │ SIG ←─ ESP32    │    │ SIG ←─ ESP32    │
+         │ OUT+ ──→ 3.3V  │    │ SIG ←─ ESP32    │    │ SIG ←─ ESP32    │
          │ OUT- ──→ GND   │    │ DC+ ──→ Fan #1+ │    │ DC+ ──→ Fan #2+ │
          └────────┬───────┘    │ DC- ──→ Fan #1- │    │ DC- ──→ Fan #2- │
                   │            └─────────┬───────┘    └─────────┬───────┘
@@ -33,7 +33,7 @@ ESP32 Fan Control System - Detailed Wiring Schematic
             │                    ESP32 V4                                │
             │                  (CP2102)                                  │
             │                                                            │
-            │  VIN ←─ 5V (from LM2596s)                                  │
+            │  VIN ←─ 3.3V (from LM2596s)                                │
             │  GND ←─ Common Ground                                      │
             │                                                            │
             │  GPIO22 ──→ DHT22 #1 Data   GPIO21 ──→ DHT22 #2 Data     │
@@ -87,7 +87,7 @@ DHT22 → ESP32 → Temperature Reading → Logic → GPIO Output → FET Board 
 
 Power Flow:
 ==========
-12V Supply → LM2596s → 5V → ESP32
+12V Supply → LM2596s → 3.3V → ESP32
 12V Supply → FET Boards → Fans (when triggered)
 ESP32 3.3V → DHT22 Sensors
 ```
