@@ -72,3 +72,7 @@ This project is inspired by the excellent work of [patrickcollins12 on GitHub](h
 * The 3D case is designed to be as small as possible. Therefore, there is not too much flexibility in how to mount things together. In case you solder PINs on each component (where necessary), make sure that one of the two transistor boards has the PINs soldered "upside down" - Otherwise the box won't close.
 In case of doubt, take a look at the images in the img folder.
 * Be careful that open ends of 12V and 3.3V cables do not touch each other. This may cause things to break quite quickly. Use cable shrink tubes or electrical tapes to avoid this, where jumper cables (if used) are at risk to touch each other to cause short circuits. 
+
+## License
+This project is published under [CC BY-NC-SA
+4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
