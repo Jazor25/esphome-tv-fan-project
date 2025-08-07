@@ -6,7 +6,7 @@ This setup controls 2 fans independently, based on the temperature of 2 distinct
 This solution can natively be integratd into Home Assistant using ESPHome, but it also runs autonomously without it.
 
 # Motivation
-I wanted to build a TV/Media setup in our living room that is as clean as possible. This means (mostly) no devices visible on or in the TV board. Hardware running in closed cabinets without cooling results in overheated hardware, so I needed to find a solution.
+I wanted to build a TV/Media setup in our living room that is as clean as possible. This means (mostly) no devices visible on or in the TV board. Hardware running in closed cabinets without cooling results in overheated hardware, so I needed to find a solution. I already built something similar based on an Arduino Uno 3 years ago, which did no longer work properly and had no integration with Home Assistant.
 
 This project is inspired by the excellent work of [patrickcollins12 on GitHub](https://github.com/patrickcollins12/esphome-fan-controller). I built my own project for several reasons:
 * I only had 3 PIN fans from an older similar setup, no PWM conrol
