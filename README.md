@@ -37,7 +37,7 @@ This project draws inspiration from the excellent work of [patrickcollins12 on G
 * 12V 1-2A Power Supply
 * 12V Male-to-Female Power Adapter
 * Jumper cables
-* WAGO 221-415, COMPACT Splicing Connector, 5-pole (Optional, but fit well into the 3D-printed case) 
+* 4x WAGO 221-415, COMPACT Splicing Connector, 5-pole (Optional, but fit well into the 3D-printed case) 
 
 ## Wiring & Pin Assignments
 
