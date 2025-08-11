@@ -52,7 +52,7 @@ Your configuration already has the API enabled:
 ```yaml
 api:
   encryption:
-    key: "lnlg+aTC1uDy/QYeGJBBzu5zuivdzFpj2NgK/iLb0Ws="
+    key: "YOUR_API_ENCRYPTION_KEY_HERE"
 ```
 
 #### 2. Manual Integration
@@ -60,7 +60,7 @@ api:
 2. Click **+ ADD INTEGRATION**
 3. Search for "ESPHome"
 4. Enter your ESP32's IP address
-5. Enter the encryption key from your config
+5. Enter the encryption key from your ESPHome config
 
 ## Method 3: MQTT Integration (Alternative)
 
