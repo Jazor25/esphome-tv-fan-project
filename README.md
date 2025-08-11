@@ -1,7 +1,7 @@
 # ESPHome TV Fan Project
-This project describes how to build a thermostat-controlled fan control system for cooling your Playstation, Tuner or other hardware in a cabinet. I also built a 3D printed case which fits all components perfectly.
+This project describes how to build a thermostat-controlled fan control system for cooling your Playstation, Tuner or other hardware that produces heat in a cabinet. I also built a 3D printed case which fits all components perfectly.
 
-This setup controls 2 fans independently, based on the temperature of 2 distinct DHT22 sensors, but could easily be extended to control more fans and/or DHT22's. 
+This setup controls two fans independently, based on the temperature of two distinct DHT22 sensors, but could easily be extended to control more fans and/or DHT22's. 
 
 This solution can natively be integrated into Home Assistant using ESPHome, but it also runs autonomously and controls fans based on the temperature in the cabinet without it.
 
