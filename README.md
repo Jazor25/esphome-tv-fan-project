@@ -32,12 +32,12 @@ This project draws inspiration from the excellent work of [patrickcollins12 on G
 * ESP32 Development Board (Used: ESP32 V4 with CP2102, AZDelivery)
 * 2× DC 5V-36V 400W FET Trigger Switch Boards
 * 1× LM2596s Step-Down Voltage Regulator (24V/12V/5V/3V Buck Converter)
-* 2× DHT22 Temperature/Humidity Sensors
+* 2x DHT22 Temperature/Humidity Sensors
 * 2× 12V PC Fans (2-pin configuration)
 * 12V 1-2A Power Supply
 * 12V Male-to-Female Power Adapter
 * Jumper cables
-* 4x WAGO 221-415, COMPACT Splicing Connector, 5-pole (Optional, but fit well into the 3D-printed case) 
+* 4× WAGO 221-415, COMPACT Splicing Connector, 5-pole (Optional, but fit well into the 3D-printed case) 
 
 ## Wiring & Pin Assignments
 
