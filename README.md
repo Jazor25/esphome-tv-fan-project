@@ -26,6 +26,7 @@ This project draws inspiration from the excellent work of [patrickcollins12 on G
 ![Installed Fan 1](img/fan_installed_1.jpg)
 ![Installed Fan 2](img/fan_installed_2.jpg)
 ![Home Assistant Integration](img/home_assistant_integration.png)
+![Circuit Wiring](img/circuit_image.png)
 
 ## Hardware Components
 
