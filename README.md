@@ -80,7 +80,7 @@ This project draws inspiration from the excellent work of [patrickcollins12 on G
 
 * **Voltage Regulation**: The buck converter must be precisely adjusted to 3.3V to prevent damage to the ESP32 and connected modules. Connect 12V to the input pins, attach a multimeter (set to voltage mode) to the output pins, and carefully adjust the potentiometer with a screwdriver until the multimeter reads exactly 3.3V.
 
-* **Compact Design**: The 3D case is designed for minimal size, which limits assembly flexibility. When soldering pins to components, ensure one of the FET boards has pins soldered "upside down" - otherwise, the case won't close properly. Refer to the images in the img folder if uncertain about component orientation.
+* **Compact Design**: The 3D case is designed for minimal size, which limits assembly flexibility. When soldering pins to components, ensure one of the FET boards has pins soldered "upside down" - otherwise, the case won't close properly. Refer to the images in the img folder if uncertain about component orientation. On the other hand, you avoid these issues if you use flexible soldering cables instead of jumper cables.
 
 * **Safety Precautions**: Prevent bare 12V and 3.3V wire ends from touching each other, as this can cause immediate component failure. Use heat shrink tubing or electrical tape to insulate exposed connections, especially where jumper cables might accidentally contact each other and create short circuits. 
 
