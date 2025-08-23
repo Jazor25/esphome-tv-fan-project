@@ -134,7 +134,7 @@ number:
     min_value: 5
     max_value: 38
     step: 0.5
-    initial_value: 29.0  # old default: 28
+    initial_value: 28.0  # old default: 28
     set_action:
       then:
         - logger.log:
